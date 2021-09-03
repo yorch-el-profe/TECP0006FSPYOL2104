@@ -1,0 +1,23 @@
+{
+  "name": "ejemplo_html",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/jorge.ramon.fciencias/demo-ci-cd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/jorge.ramon.fciencias/demo-ci-cd/issues"
+  },
+  "homepage": "https://gitlab.com/jorge.ramon.fciencias/demo-ci-cd#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

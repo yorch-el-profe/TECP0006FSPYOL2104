@@ -1,0 +1,29 @@
+continuos_integration:
+  image: node:latest
+  stage: build
+  before_script:
+    - npm install -g html-validate
+  script:
+    - npm install
+    - html-validate index.html
+
+continous_delivery:
+  image: ubuntu:latest
+  stage: deploy
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - |
+      ssh ubuntu@ec2-34-222-21-241.us-west-2.compute.amazonaws.com << EOF
+        cd demo-ci-cd
+        git pull origin master
+        pm2 restart index.js
+      EOF
+
+stages:
+  - build
+  - deploy
